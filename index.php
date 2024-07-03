@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1);
 session_start();
-include("config.php");
+include("inc/config.php");
+$title = 'Teacher Portal';
+require_once 'src/functions.php';
+$meta = getMetaSeo(['title' => $title]);
+require_once 'inc/header.php';
 
 if (isset($_POST["submit"])) {
     global $con;
@@ -20,11 +24,6 @@ if (isset($_POST["submit"])) {
         echo "<script>alert('Invalid Detail');</script>";
     }
 }
-
-$title = 'Teacher Portal';
-require_once 'src/functions.php';
-$meta = getMetaSeo(['title' => $title]);
-require_once 'inc/header.php';
 ?>
 
 <div class="wrapper indexPage container">

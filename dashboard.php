@@ -1,11 +1,10 @@
 <?php
 declare(strict_types=1);
 session_start();
-include("config.php");
+include("inc/config.php");
 if (!isset($_SESSION["uid"])) {
     header("location:index.php");
 }
-
 $title = 'Dashboard';
 require_once 'src/functions.php';
 $meta = getMetaSeo(['title' => $title]);
