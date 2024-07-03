@@ -44,9 +44,9 @@ if (isset($_POST["submit"])) {
                 <h2>Teacher Portal</h2>
                 <br/>
                 <form action="/" method="POST" autocomplete="off">
-                    <input type="text" class="searchBox" placeholder="Enter Username" name="uname"/><br/>
-                    <input type="password" class="searchBox" placeholder="Enter Password" name="upass"/>
-                    <input class="searchButton" type="submit" name="submit" value="Log In"/>
+                    <input type="text" class="searchBox" placeholder="Enter Username" name="uname" value="teacher" /><br/>
+                    <input type="password" class="searchBox" placeholder="Enter Password" name="upass" value="password" />
+                    <input class="searchButton" type="submit" name="submit" value="Log In" />
                 </form>
             </div>
         </div>
