@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 session_start();
-include("inc/config.php");
-if (!isset($_SESSION["uid"])) {
-    header("location:index.php");
+include 'inc/config.php';
+if (! isset($_SESSION['uid'])) {
+    header('location:index.php');
 }
 $title = 'Dashboard';
 require_once 'src/functions.php';
@@ -12,7 +12,7 @@ require_once 'inc/header.php';
 
 global $con;
 
-$studentQuery = $con->query("SELECT * FROM students");
+$studentQuery = $con->query('SELECT * FROM students');
 $students = $studentQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?>

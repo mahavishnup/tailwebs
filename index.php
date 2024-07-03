@@ -1,33 +1,33 @@
 <?php
 declare(strict_types=1);
 session_start();
-include("inc/config.php");
+include 'inc/config.php';
 $title = 'Teacher Portal';
 require_once 'src/functions.php';
 $meta = getMetaSeo(['title' => $title]);
 require_once 'inc/header.php';
 
-if (isset($_SESSION["uid"])) {
-    header("location:dashboard.php");
+if (isset($_SESSION['uid'])) {
+    header('location:dashboard.php');
     exit;
 }
 
-if (isset($_POST["submit"])) {
+if (isset($_POST['submit'])) {
     global $con;
 
-    $uname = $_POST["uname"];
-    $upass = $_POST["upass"];
-    $userQuery = $con->prepare("SELECT * FROM users WHERE uname = :username");
+    $uname = $_POST['uname'];
+    $upass = $_POST['upass'];
+    $userQuery = $con->prepare('SELECT * FROM users WHERE uname = :username');
     $userQuery->bindParam(':username', $uname, PDO::PARAM_STR);
     $userQuery->execute();
 
     if ($user = $userQuery->fetch(PDO::FETCH_ASSOC)) {
-        $verify = password_verify($upass, $user["upass"]);
+        $verify = password_verify($upass, $user['upass']);
 
         if ($verify) {
-            $_SESSION["uid"] = $user["uid"];
-            $_SESSION["uname"] = $user["uname"];
-            header("location:dashboard.php");
+            $_SESSION['uid'] = $user['uid'];
+            $_SESSION['uname'] = $user['uname'];
+            header('location:dashboard.php');
             exit;
         } else {
             echo "<script>alert('Incorrect Password!');</script>";

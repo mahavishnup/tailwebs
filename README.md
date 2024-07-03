@@ -7,3 +7,4 @@
 2. Within the new directory run the following
     1. `need to create mysql database tailwebs`
     2. `laravel herd or xampp software`
+    3. `./vendor/bin/phpunit tests/ExampleTest.php`
