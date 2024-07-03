@@ -2,6 +2,11 @@
 node_modules/
 npm-debug.log
 yarn-error.log
-
-.vscode
-.idea
+error_log
+/.idea
+/.vscode
+composer.lock
+package-lock.json
+yarn.lock
+notes.txt
+.env
