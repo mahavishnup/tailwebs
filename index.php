@@ -9,6 +9,7 @@ require_once 'inc/header.php';
 
 if (isset($_SESSION["uid"])) {
     header("location:dashboard.php");
+    exit;
 }
 
 if (isset($_POST["submit"])) {
@@ -24,20 +25,15 @@ if (isset($_POST["submit"])) {
         $verify = password_verify($upass, $user["upass"]);
 
         if ($verify) {
-            $query = $con->prepare("SELECT * FROM users WHERE uname = :username and upass = :userpass");
-            $query->bindParam(':username', $uname, PDO::PARAM_STR);
-            $query->bindParam(':userpass', $user["upass"], PDO::PARAM_STR);
-            $query->execute();
-            if ($results = $query->fetch(PDO::FETCH_ASSOC)) {
-                $_SESSION["uid"] = $results["uid"];
-                $_SESSION["uname"] = $results["uname"];
-                header("location:dashboard.php");
-            } else {
-                echo "<script>alert('Invalid Detail');</script>";
-            }
+            $_SESSION["uid"] = $user["uid"];
+            $_SESSION["uname"] = $user["uname"];
+            header("location:dashboard.php");
+            exit;
         } else {
             echo "<script>alert('Incorrect Password!');</script>";
         }
+    } else {
+        echo "<script>alert('Invalid Detail');</script>";
     }
 }
 ?>
@@ -59,15 +55,3 @@ if (isset($_POST["submit"])) {
 <?php
 require_once 'inc/footer.php';
 ?>
-
-<?php
-//$plaintext_password = "password";
-//$hash = password_hash($plaintext_password, PASSWORD_DEFAULT);
-//echo "Generated hash: " . $hash;
-//$verify = password_verify($plaintext_password, $hash);
-//if ($verify) {
-//    echo ' Password Verified!';
-//} else {
-//    echo ' Incorrect Password!';
-//}
-//?>

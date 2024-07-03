@@ -1,5 +1,8 @@
 <?php
+declare(strict_types=1);
 session_start();
-unset($_SESSION["uid"]);
+session_unset();
 session_destroy();
 header("location:index.php");
+exit;
+?>

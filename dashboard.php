@@ -15,7 +15,10 @@ require_once 'inc/header.php';
         <div class="mainSection">
             <div class="searchContainer" style="text-align: center; width: 420px;">
                 <h2>Dashboard</h2>
-                <br/>
+                <br>
+                <div class="mt-5">
+                    <a href="logout.php"><span>Logout</span> </a>
+                </div>
             </div>
         </div>
     </div>
