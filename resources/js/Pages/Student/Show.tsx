@@ -32,7 +32,7 @@ interface Student {
     user: any
 }
 
-export default function Dashboard({ auth, students }: PageProps<{students: Student[]}>) {
+export default function Show({ auth, students }: PageProps<{students: Student[]}>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -70,11 +70,11 @@ export default function Dashboard({ auth, students }: PageProps<{students: Stude
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger>Action</DropdownMenuTrigger>
                                                 <DropdownMenuContent>
-                                                    <DropdownMenuLabel className="cursor-pointer">
+                                                    <DropdownMenuLabel>
                                                         <Link href={route('dashboard.edit', student.id)}>Edit</Link>
                                                     </DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="cursor-pointer">
+                                                    <DropdownMenuItem>
                                                         <Link href={route('dashboard.destroy', student.id)}>Delete</Link>
                                                     </DropdownMenuItem>
                                                 </DropdownMenuContent>
