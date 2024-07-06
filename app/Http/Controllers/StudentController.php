@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -42,7 +42,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return Inertia::render('Student/Show', compact('student'));
+        return Inertia::render('Student/Show', ['student' => new StudentResource($student)]);
     }
 
     /**
@@ -50,7 +50,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return Inertia::render('Student/Edit', compact('student'));
+        return Inertia::render('Student/Edit', ['student' => new StudentResource($student)]);
     }
 
     /**

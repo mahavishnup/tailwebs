@@ -22,9 +22,9 @@ class StudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'subject' => 'required',
-            'mark' => 'required',
+            'name' => ['required', 'string', 'max:255'],
+            'subject' => ['required', 'string', 'max:255'],
+            'mark' => ['required'],
         ];
     }
 }

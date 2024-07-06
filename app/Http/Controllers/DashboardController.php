@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,10 @@ class DashboardController extends Controller
             ->where('user_id', @Auth::user()->id)
             ->get();
 
-        return Inertia::render('Dashboard', compact('students'));
+        //        dd($students);
+
+        return Inertia::render('Dashboard', [
+            'students' => StudentResource::collection($students),
+        ]);
     }
 }

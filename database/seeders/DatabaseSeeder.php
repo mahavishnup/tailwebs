@@ -12,12 +12,13 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     *
      * @throws RandomException
      */
     public function run(): void
     {
         User::factory()
-            ->has(Student::factory(random_int(2,7)), 'students')
+            ->has(Student::factory(random_int(2, 7)), 'students')
             ->count(random_int(2, 5))
             ->create();
     }

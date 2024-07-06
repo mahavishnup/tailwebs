@@ -1,7 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, router} from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Button } from "@/Components/ui/button"
+import { useToast } from "@/Components/ui/use-toast"
 
 import {
     Table,
@@ -27,12 +28,26 @@ export interface Student {
     name: string
     subject: string
     mark: number
-    created_at: string
-    updated_at: string
-    user?: any
+    user?: {
+        id: number
+        name: string
+        email: string
+    }
 }
 
 export default function Dashboard({ auth, students }: PageProps<{students: Student[]}>) {
+    const { toast } = useToast()
+
+    const deleteStudent = (student: Student) => {
+        if (!window.confirm("Are you sure you want to delete the user?")) {
+            return;
+        }
+        router.delete(route('student.destroy', {student: student.id}));
+        toast({
+            description: "Student deleted successfully.",
+        })
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -78,8 +93,8 @@ export default function Dashboard({ auth, students }: PageProps<{students: Stude
                                                         <Link href={route('student.edit', {student: student.id})}>Edit</Link>
                                                     </DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="cursor-pointer">
-                                                        <Link href={route('student.destroy', {student: student.id})}>Delete</Link>
+                                                    <DropdownMenuItem className="cursor-pointer" onClick={e => deleteStudent(student)}>
+                                                        Delete
                                                     </DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
