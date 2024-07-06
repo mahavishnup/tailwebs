@@ -12,40 +12,22 @@ import {
     TableRow,
 } from "@/Components/ui/table"
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/Components/ui/dropdown-menu"
+import {Student} from "@/Pages/Dashboard";
 
-
-interface Student {
-    id: number
-    name: string
-    subject: string
-    mark: number
-    created_at: string
-    updated_at: string
-    user: any
-}
-
-export default function Show({ auth, students }: PageProps<{students: Student[]}>) {
+export default function Show({ auth, student }: PageProps<{student: Student}>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Show {student?.name} </h2>}
         >
-            <Head title="Dashboard" />
+            <Head title={`Show ${student?.name}`} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="text-center my-4">
                             <Button asChild>
-                                <Link href={route('dashboard.create')}>Create</Link>
+                                <Link href={route('dashboard')}>Back</Link>
                             </Button>
                         </div>
 
@@ -56,32 +38,15 @@ export default function Show({ auth, students }: PageProps<{students: Student[]}
                                     <TableHead>Name</TableHead>
                                     <TableHead>Subject</TableHead>
                                     <TableHead className="text-right">Mark</TableHead>
-                                    <TableHead className="text-right">Action</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {students.map((student) => (
-                                    <TableRow key={student.id}>
-                                        <TableCell className="font-medium">{student.id}</TableCell>
-                                        <TableCell>{student.name}</TableCell>
-                                        <TableCell>{student.subject}</TableCell>
-                                        <TableCell className="text-right">{student.mark}</TableCell>
-                                        <TableCell className="text-right">
-                                            <DropdownMenu>
-                                                <DropdownMenuTrigger>Action</DropdownMenuTrigger>
-                                                <DropdownMenuContent>
-                                                    <DropdownMenuLabel>
-                                                        <Link href={route('dashboard.edit', student.id)}>Edit</Link>
-                                                    </DropdownMenuLabel>
-                                                    <DropdownMenuSeparator />
-                                                    <DropdownMenuItem>
-                                                        <Link href={route('dashboard.destroy', student.id)}>Delete</Link>
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuContent>
-                                            </DropdownMenu>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
+                                <TableRow key={student.id}>
+                                    <TableCell className="font-medium">{student.id}</TableCell>
+                                    <TableCell>{student.name}</TableCell>
+                                    <TableCell>{student.subject}</TableCell>
+                                    <TableCell className="text-right">{student.mark}</TableCell>
+                                </TableRow>
                             </TableBody>
                         </Table>
                     </div>

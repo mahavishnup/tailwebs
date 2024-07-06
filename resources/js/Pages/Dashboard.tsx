@@ -22,14 +22,14 @@ import {
 } from "@/Components/ui/dropdown-menu"
 
 
-interface Student {
+export interface Student {
     id: number
     name: string
     subject: string
     mark: number
     created_at: string
     updated_at: string
-    user: any
+    user?: any
 }
 
 export default function Dashboard({ auth, students }: PageProps<{students: Student[]}>) {
@@ -45,7 +45,7 @@ export default function Dashboard({ auth, students }: PageProps<{students: Stude
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="text-center my-4">
                             <Button asChild>
-                                <Link href={route('dashboard.create')}>Create</Link>
+                                <Link href={route('student.create')}>Create</Link>
                             </Button>
                         </div>
 
@@ -71,11 +71,15 @@ export default function Dashboard({ auth, students }: PageProps<{students: Stude
                                                 <DropdownMenuTrigger>Action</DropdownMenuTrigger>
                                                 <DropdownMenuContent>
                                                     <DropdownMenuLabel className="cursor-pointer">
-                                                        <Link href={route('dashboard.edit', student.id)}>Edit</Link>
+                                                        <Link href={route('student.show', {student: student.id})}>Show</Link>
+                                                    </DropdownMenuLabel>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuLabel className="cursor-pointer">
+                                                        <Link href={route('student.edit', {student: student.id})}>Edit</Link>
                                                     </DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
                                                     <DropdownMenuItem className="cursor-pointer">
-                                                        <Link href={route('dashboard.destroy', student.id)}>Delete</Link>
+                                                        <Link href={route('student.destroy', {student: student.id})}>Delete</Link>
                                                     </DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
