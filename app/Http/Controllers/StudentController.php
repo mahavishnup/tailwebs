@@ -6,6 +6,7 @@ use App\Http\Requests\StudentRequest;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -32,7 +33,11 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        Student::create($request->validated() + ['user_id' => @Auth::user()?->id]);
+        Student::query()
+            ->updateOrCreate([
+                'name' => $request?->name,
+                'subject' => $request?->subject,
+            ], ['mark' => DB::raw("mark + {$request?->mark}"), 'user_id' => @Auth::user()?->id]);
 
         return Redirect::route('dashboard')->with('success', 'Student created successfully.');
     }
